@@ -8,10 +8,10 @@ info() {
 
 main() {
   info "Bootstrapping this machine";
-  /bin/bash -c ./boostrappers/bootstrap-xcode.sh;
-  /bin/bash -c ./boostrappers/bootstrap-iterm.sh;
-  /bin/bash -c ./boostrappers/bootstrap-homebrew.sh;
-  /bin/bash -c ./boostrappers/bootstrap-zsh.sh;
+  /bin/bash -c ./bootstrappers/bootstrap-xcode.sh;
+  /bin/bash -c ./bootstrappers/bootstrap-iterm.sh;
+  /bin/bash -c ./bootstrappers/bootstrap-homebrew.sh;
+  /bin/bash -c ./bootstrappers/bootstrap-zsh.sh;
 }
 
 main "$@";
