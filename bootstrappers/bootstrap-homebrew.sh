@@ -28,53 +28,66 @@ set_path() {
 
 main() {
   init_logger
-  SUDO_USER=$(whoami);
+  info "This bootstrapper is going to install homebrew and some base packages."; # -------------------------------------------------------------------------
+  info "Would you like to continue?"
+  while true; do
+    read -p "$prefix Enter [y|n]:" answer
+    case $answer in
+      [Yy])
+        SUDO_USER=$(whoami);
 
-  if ! type -t brew; then
-    info "Downloading and installing brew"; # -------------------------------------------------------------
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
-    if [ ! $? -eq 0 ] 
-    then
-        info "Failed to install Homebrew"
-        exit 1
-    fi
-  else
-    info "Homebrew already installed!"
-  fi;
+        if ! type -t brew; then
+          info "Downloading and installing brew"; # -------------------------------------------------------------
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+          if [ ! $? -eq 0 ] 
+          then
+              info "Failed to install Homebrew"
+              exit 1
+          fi
+        else
+          info "Homebrew already installed!"
+        fi;
 
-  set_path $HOME/.env.sh;
-  set_path $HOME/.zprofile;
-  set_path $HOME/.bash_profile;
-  set_path $HOME/.zshrc
+        set_path $HOME/.env.sh;
+        set_path $HOME/.zprofile;
+        set_path $HOME/.bash_profile;
+        set_path $HOME/.zshrc
 
-  eval "$(/opt/homebrew/bin/brew shellenv)"
+        eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  brew update;
+        brew update;
 
-  info "Installing some base packages...";
+        info "Installing some base packages...";
 
-  PACKAGES=(
-    awscli
-    cask
-    cookiecutter
-    git
-    grafana
-    jq
-    kubernetes-cli
-    kubernetes-helm
-    node
-    openssl
-    python3
-    pyenv
-    terraform
-    tree
-    watch
-    wget
-  );
-  
-  brew install "${PACKAGES[@]}";
+        PACKAGES=(
+          awscli
+          cask
+          cookiecutter
+          git
+          grafana
+          jq
+          kubernetes-cli
+          kubernetes-helm
+          node
+          openssl
+          python3
+          pyenv
+          terraform
+          tree
+          watch
+          wget
+        );
+        
+        brew install "${PACKAGES[@]}";
 
-  brew cleanup;
+        brew cleanup;
+      ;;
+      [Nn]) 
+        info "Skipping...";
+        break;
+      ;;
+    esac
+  done
 }
 
 main "$@";
