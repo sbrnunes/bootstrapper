@@ -24,6 +24,7 @@ main() {
         if [ ! type -t brew ]
         then
           if [[ ! -e /opt/homebrew/bin/brew ]]
+          then
             info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
           else
             eval "$(/opt/homebrew/bin/brew shellenv)"
