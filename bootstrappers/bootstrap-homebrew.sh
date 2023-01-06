@@ -21,7 +21,8 @@ set_path() {
     else
       info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$1"
       echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
-      source $1
+      info "Loading $1"
+      $(source "$1")
     fi
   fi
 }
