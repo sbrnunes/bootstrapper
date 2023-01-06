@@ -15,12 +15,14 @@ info() {
 
 
 main() {
+  if ! type -t brew; then
+    info "Install Homebrew first!"
+    exit 1
+  fi;
+
   info "Installing iterm2"; # -------------------------------------------------------------------------
-
   brew install --cask iterm2
-
   brew tap homebrew/cask-fonts
-
   brew install --cask font-source-code-pro
 }
 

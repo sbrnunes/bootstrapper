@@ -15,6 +15,11 @@ info() {
 
 
 main() {
+  if ! type -t brew; then
+    info "Install Homebrew first!"
+    exit 1
+  fi;
+  
   info "Installing Zsh"; # -------------------------------------------------------------------------
   brew install zsh
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"

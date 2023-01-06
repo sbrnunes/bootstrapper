@@ -15,6 +15,11 @@ info() {
 
 
 main() {
+  if ! type -t brew; then
+    info "Install Homebrew first!"
+    exit 1
+  fi;
+
   info "Downloading and updating brew"; # -------------------------------------------------------------
   brew install --cask visual-studio-code
 }
