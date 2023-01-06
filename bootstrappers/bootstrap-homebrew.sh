@@ -41,8 +41,6 @@ main() {
     info "Homebrew already installed!"
   fi;
 
-  echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile;
-
   set_path $HOME/.env.sh;
   set_path $HOME/.zprofile;
   set_path $HOME/.bash_profile;
