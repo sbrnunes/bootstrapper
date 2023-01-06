@@ -48,7 +48,7 @@ main() {
 
           info "Adding privates keys to the ssh agent..."
 
-          for file in $keys
+          for file in "${keys[@]}"
           do
             case $file in !*pub*)
               info "Adding $file..."
