@@ -15,9 +15,9 @@ info() {
 
 add_brew_to_path() {
   if grep -q "/opt/homebrew/bin/brew" "$1" ; then
-    info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in $1.'
+    info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in '"$1"
   else
-    info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to $1'
+    info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$1"
     echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
   fi
 }
