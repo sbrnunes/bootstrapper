@@ -17,7 +17,7 @@ info() {
 main() {
   info "Downloading and updating brew"; # -------------------------------------------------------------
 
-  SUDO_USER=$(whoami)
+  SUDO_USER=$(whoami);
 
   if ! type -t brew; then
     info "Downloading and installing Homebrew";
