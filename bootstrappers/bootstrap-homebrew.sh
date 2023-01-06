@@ -13,6 +13,10 @@ info() {
   echo "$(tput setaf 13)${prefix}$(tput sgr0) $1 $(tput setaf 13)${rhs}$(tput sgr0)";
 }
 
+add_brew_to_path(file) {
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> file
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> file
+}
 
 main() {
   info "Downloading and updating brew"; # -------------------------------------------------------------
@@ -30,8 +34,12 @@ main() {
   fi;
 
   echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile;
-  
-  source ~/.bash_profile;
+
+  add_brew_to_path $HOME/.zprofile;
+  add_brew_to_path $HOME/.bash_profile;
+  add_brew_to_path $HOME/.zshrc
+
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 
   brew update;
 
