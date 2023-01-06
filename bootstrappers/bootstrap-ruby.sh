@@ -21,7 +21,7 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        if [ ! type -t brew ]
+        if ! type -t brew
         then
           if [[ ! -e /opt/homebrew/bin/brew ]]
           then
