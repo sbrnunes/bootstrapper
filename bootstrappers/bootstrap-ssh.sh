@@ -48,12 +48,13 @@ main() {
 
           info "Adding privates keys to the ssh agent..."
 
-          for file in "${keys[@]}"
+          for file in $HOME/.ssh/id_ed25519_td*
           do
-            case $file in !*pub*)
-              info "Adding $file..."
-              #ssh-add -K $file
-            esac
+	      if [[ ! $file == *.pub ]]
+              then
+                info "Adding $file..."
+                ssh-add --apple-use-keychain $file
+              fi
           done
 
           info "Take a moment to add the public key to your GitHub instance, if needed:"
