@@ -2,11 +2,6 @@
 
 scriptName="$(basename "$0")";
 
-add_brew_to_path() {
-  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> $1
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
-}
-
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
@@ -16,6 +11,15 @@ init_logger() {
 
 info() {
   echo "$prefix $1";
+}
+
+add_brew_to_path() {
+  if grep -q "/opt/homebrew/bin/brew" "$1" ; then
+    info "Found eval "$(/opt/homebrew/bin/brew shellenv)" in $1."
+  else
+    info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to $1'
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
+  fi
 }
 
 main() {
