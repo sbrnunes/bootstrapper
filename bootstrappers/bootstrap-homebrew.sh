@@ -13,12 +13,15 @@ info() {
   echo "$prefix $1";
 }
 
-add_brew_to_path() {
-  if grep -q "/opt/homebrew/bin/brew" "$1" ; then
-    info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in '"$1"
-  else
-    info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$1"
-    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
+set_path() {
+  if [[ -e $1 ]]
+  then
+    if grep -q "/opt/homebrew/bin/brew" "$1" ; then
+      info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in '"$1"
+    else
+      info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$1"
+      echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
+    fi
   fi
 }
 
@@ -40,9 +43,10 @@ main() {
 
   echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile;
 
-  add_brew_to_path $HOME/.zprofile;
-  add_brew_to_path $HOME/.bash_profile;
-  add_brew_to_path $HOME/.zshrc
+  set_path $HOME/.env.sh;
+  set_path $HOME/.zprofile;
+  set_path $HOME/.bash_profile;
+  set_path $HOME/.zshrc
 
   eval "$(/opt/homebrew/bin/brew shellenv)"
 
