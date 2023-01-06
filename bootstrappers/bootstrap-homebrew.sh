@@ -30,6 +30,8 @@ main() {
   fi;
 
   echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile;
+  
+  source ~/.bash_profile;
 
   brew update;
 
