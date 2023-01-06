@@ -17,9 +17,11 @@ info() {
 main() {
   info "Downloading and updating brew"; # -------------------------------------------------------------
 
+  SUDO_USER=$(whoami)
+
   if ! type -t brew; then
-    >&2 echo "Downloading and installing Homebrew";
-    NONINTERACTIVE=1 chsh -s "$(/bin/bash -c curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    info "Downloading and installing Homebrew";
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     if [ ! $? -eq 0 ] 
     then
         info "Failed to install Homebrew"
@@ -27,11 +29,34 @@ main() {
     fi
   fi;
 
-  echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
+  echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile;
 
   brew update;
 
-  brew install --cask visual-studio-code
+  info "Installing some base packages...";
+
+  PACKAGES=(
+    awscli
+    cask
+    cookiecutter
+    git
+    grafana
+    jq
+    kubernetes-cli
+    kubernetes-helm
+    node
+    openssl
+    python3
+    pyenv
+    terraform
+    tree
+    watch
+    wget
+  );
+  
+  brew install "${PACKAGES[@]}";
+
+  brew cleanup;
 }
 
 main "$@";
