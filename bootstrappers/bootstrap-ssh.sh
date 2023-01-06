@@ -16,15 +16,15 @@ info() {
 }
 
 main() {
+  local max_loops=0
   init_logger
-  info "Setting up SSH"; # -------------------------------------------------------------------------    
-  info "This bootstrapper is going to generate an SSH key in ~/.ssh."
+  info "This bootstrapper is going to provision the required ssh keys in your machine."; # -------------------------------------------------------------------------
   info "Would you like to continue?"
-  
+
   while true; do
-    read -p "$prefix Enter [y|n]: " answer
+    read -p "$prefix Enter [y|n]:" answer
     case $answer in
-      [Yy]*)
+      [Yy])
         keys=( $HOME/.ssh/id_ed25519_td* )
 
         if [[ "${#keys[@]}" -eq 0 ]]
@@ -67,12 +67,17 @@ main() {
         fi
         break;
       ;;
-      [Nn]* ) 
+      [Nn]) 
         info "Skipping...";
         break;
       ;;
       *)
-        info "Would you like to continue? [y|n]";
+        info "Would you like to continue?";
+        ((max_loops++))
+        if [ $max_loops > 2 ]
+        then
+          exit 1
+        fi
       ;;
     esac
   done
