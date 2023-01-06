@@ -54,6 +54,7 @@ main() {
             fi;
           fi
         fi
+        break;
       ;;
       [Nn]) 
         info "Skipping...";

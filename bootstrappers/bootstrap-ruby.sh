@@ -35,6 +35,7 @@ main() {
             source $HOME/env.sh
           fi
         fi
+        break;
       ;;
       [Nn]) 
         info "Skipping...";

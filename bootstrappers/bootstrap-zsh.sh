@@ -59,6 +59,7 @@ main() {
             source $HOME/.zshrc
           fi
         fi
+        break;
       ;;
       [Nn]) 
         info "Skipping...";

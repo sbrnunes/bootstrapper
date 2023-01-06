@@ -35,6 +35,7 @@ main() {
             brew install --cask font-source-code-pro
           fi
         fi
+        break;
       ;;
       [Nn]) 
         info "Skipping...";

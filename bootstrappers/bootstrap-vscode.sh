@@ -33,6 +33,7 @@ main() {
             brew install --cask visual-studio-code
           fi
         fi
+        break;
       ;;
       [Nn]) 
         info "Skipping...";
