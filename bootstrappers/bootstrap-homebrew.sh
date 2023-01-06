@@ -19,7 +19,7 @@ main() {
 
   if ! type -t brew; then
     >&2 echo "Downloading and installing Homebrew";
-    chsh -s "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   fi;
 
   echo 'PATH="/usr/local/bin:$PATH"' >> ~/.bash_profile
