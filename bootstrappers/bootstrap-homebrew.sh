@@ -23,7 +23,7 @@ main() {
 
   if ! type -t brew; then
     info "Downloading and installing brew"; # -------------------------------------------------------------
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+    sudo -s /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
     if [ ! $? -eq 0 ] 
     then
         info "Failed to install Homebrew"
