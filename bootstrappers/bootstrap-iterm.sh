@@ -21,19 +21,16 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        if ! type -t brew
+        if [[ $(type -t brew) = "" ]] && [ ! -f /opt/homebrew/bin/brew ]
         then
-          if [[ ! -e /opt/homebrew/bin/brew ]]
-          then
             info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
-          else
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+        else
+          eval "$(/opt/homebrew/bin/brew shellenv)"
 
-            info "Installing iterm2"; # -------------------------------------------------------------------------
-            brew install --cask iterm2
-            brew tap homebrew/cask-fonts
-            brew install --cask font-source-code-pro
-          fi
+          info "Installing iterm2"; # -------------------------------------------------------------------------
+          brew install --cask iterm2
+          brew tap homebrew/cask-fonts
+          brew install --cask font-source-code-pro
         fi
         break;
       ;;

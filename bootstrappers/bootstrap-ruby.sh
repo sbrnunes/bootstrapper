@@ -21,19 +21,16 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        if ! type -t brew
+        if [[ $(type -t brew) = "" ]] && [ ! -f /opt/homebrew/bin/brew ]
         then
-          if [[ ! -e /opt/homebrew/bin/brew ]]
-          then
             info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
-          else
-            eval "$(/opt/homebrew/bin/brew shellenv)"
+        else
+          eval "$(/opt/homebrew/bin/brew shellenv)"
 
-            brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-            echo '### rbenv' $HOME/env.sh
-            echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
-            source $HOME/env.sh
-          fi
+          brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
+          echo '### rbenv' $HOME/env.sh
+          echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
+          source $HOME/env.sh
         fi
         break;
       ;;
