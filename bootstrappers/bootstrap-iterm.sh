@@ -15,15 +15,32 @@ info() {
 
 main() {
   init_logger
-  if ! type -t brew; then
-    info "Install Homebrew first!"
-    exit 1
-  fi;
+  info "This bootstrapper is going to download and install iterm2 via Homebrew."; # -------------------------------------------------------------------------
+  info "Would you like to continue?"
+  while true; do
+    read -p "$prefix Enter [y|n]:" answer
+    case $answer in
+      [Yy])
+        if [ ! type -t brew ]
+        then
+          if [[ ! -e /opt/homebrew/bin/brew ]]
+            info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
+          else
+            eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  info "Installing iterm2"; # -------------------------------------------------------------------------
-  brew install --cask iterm2
-  brew tap homebrew/cask-fonts
-  brew install --cask font-source-code-pro
+            info "Installing iterm2"; # -------------------------------------------------------------------------
+            brew install --cask iterm2
+            brew tap homebrew/cask-fonts
+            brew install --cask font-source-code-pro
+          fi
+        fi
+      ;;
+      [Nn]) 
+        info "Skipping...";
+        break;
+      ;;
+    esac
+  done
 }
 
 main "$@";

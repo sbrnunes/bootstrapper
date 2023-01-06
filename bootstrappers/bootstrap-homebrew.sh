@@ -13,21 +13,20 @@ info() {
   echo "$prefix $1";
 }
 
-set_path() {
-  if [[ -e $1 ]]
-  then
-    if grep -q "/opt/homebrew/bin/brew" "$1" ; then
-      info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in '"$1"
-    else
-      info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$1"
-      echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
-      info "Loading $1"
-      source "$1"
-      if ! type -t brew; then
-        info "Warning: brew not loaded properly to the path."
-      fi;
-    fi
+init_brew() {
+  # env.sh will be a convention, agnostic from the shell
+  [[ -e $HOME/env.sh ]] || touch $HOME/env.sh # create if does not exist
+
+  if grep -q "/opt/homebrew/bin/brew" "$HOME/env.sh" ; then
+    info 'Found eval "$(/opt/homebrew/bin/brew shellenv)" in '"$HOME/env.sh"
+  else
+    info 'Adding eval "$(/opt/homebrew/bin/brew shellenv)" to '"$HOME/env.sh"
+    echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $HOME/env.sh
+    info "Loading $HOME/env.sh"
+    source $HOME/env.sh
   fi
+
+  eval "$(/opt/homebrew/bin/brew shellenv)"
 }
 
 main() {
@@ -52,12 +51,7 @@ main() {
           info "Homebrew already installed!"
         fi;
 
-        set_path $HOME/.env.sh;
-        set_path $HOME/.zprofile;
-        set_path $HOME/.bash_profile;
-        set_path $HOME/.zshrc
-
-        eval "$(/opt/homebrew/bin/brew shellenv)"
+        init_brew
 
         brew update;
 
@@ -80,11 +74,13 @@ main() {
           tree
           watch
           wget
+          fzf
         );
         
         brew install "${PACKAGES[@]}";
 
         brew cleanup;
+        break;
       ;;
       [Nn]) 
         info "Skipping...";

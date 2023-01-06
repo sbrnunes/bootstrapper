@@ -15,10 +15,32 @@ info() {
 
 main() {
   init_logger
-  info "Installing Ruby"; # --------------------------------------------------------------------------
-  brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-  echo 'eval "$(rbenv init -)"' >> ~/.env.sh
-  source ~/.zshrc # Apply changes
+  info "This bootstrapper is going to download and install Ruby and rbenv via Homebrew"; # -------------------------------------------------------------------------
+  info "Would you like to continue?"
+  while true; do
+    read -p "$prefix Enter [y|n]:" answer
+    case $answer in
+      [Yy])
+        if [ ! type -t brew ]
+        then
+          if [[ ! -e /opt/homebrew/bin/brew ]]
+            info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
+          else
+            eval "$(/opt/homebrew/bin/brew shellenv)"
+
+            brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
+            echo '### rbenv' $HOME/env.sh
+            echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
+            source $HOME/env.sh
+          fi
+        fi
+      ;;
+      [Nn]) 
+        info "Skipping...";
+        break;
+      ;;
+    esac
+  done
 }
 
 main "$@";

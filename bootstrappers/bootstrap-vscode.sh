@@ -15,13 +15,30 @@ info() {
 
 main() {
   init_logger
-  if ! type -t brew; then
-    info "Install Homebrew first!"
-    exit 1
-  fi;
+  info "This bootstrapper is going to download and install VSCode via Homebrew"; # -------------------------------------------------------------------------
+  info "Would you like to continue?"
+  while true; do
+    read -p "$prefix Enter [y|n]:" answer
+    case $answer in
+      [Yy])
+        if [ ! type -t brew ]
+        then
+          if [[ ! -e /opt/homebrew/bin/brew ]]
+            info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
+          else
+            eval "$(/opt/homebrew/bin/brew shellenv)"
 
-  info "Downloading and updating brew"; # -------------------------------------------------------------
-  brew install --cask visual-studio-code
+            info "Installing VScode"; # -------------------------------------------------------------
+            brew install --cask visual-studio-code
+          fi
+        fi
+      ;;
+      [Nn]) 
+        info "Skipping...";
+        break;
+      ;;
+    esac
+  done
 }
 
 main "$@";
