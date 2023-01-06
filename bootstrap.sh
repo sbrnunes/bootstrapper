@@ -17,7 +17,7 @@ main() {
   shopt -u nullglob
 
   init_logger
-  info "Bootstrapping this machine";
+  info "This script will bootstrap some common tools. Would you like to continue?";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]: " answer
@@ -33,9 +33,6 @@ main() {
       [Nn])
         info "Skipping...";
         break;
-      ;;
-      *)
-        info "Would you like to continue?";
       ;;
     esac
   done

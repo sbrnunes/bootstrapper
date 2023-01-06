@@ -16,11 +16,9 @@ info() {
 }
 
 main() {
-  local max_loops=0
   init_logger
   info "This bootstrapper is going to provision the required ssh keys in your machine."; # -------------------------------------------------------------------------
   info "Would you like to continue?"
-
   while true; do
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
@@ -70,14 +68,6 @@ main() {
       [Nn]) 
         info "Skipping...";
         break;
-      ;;
-      *)
-        info "Would you like to continue?";
-        ((max_loops++))
-        if [ $max_loops > 2 ]
-        then
-          exit 1
-        fi
       ;;
     esac
   done
