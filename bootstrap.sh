@@ -3,7 +3,7 @@
 scriptName="$(basename "$0")";
 
 info() {
-  >&2 echo "$(tput setaf 190)[${scriptName}]$(tput op) $*";
+  echo "$(tput setaf 190)[${scriptName}]$(tput op) $*";
 }
 
 main() {

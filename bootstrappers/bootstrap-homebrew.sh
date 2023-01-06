@@ -13,9 +13,9 @@ info() {
   echo "$(tput setaf 13)${prefix}$(tput sgr0) $1 $(tput setaf 13)${rhs}$(tput sgr0)";
 }
 
-add_brew_to_path(file) {
-  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> file
-  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> file
+add_brew_to_path() {
+  echo '# Set PATH, MANPATH, etc., for Homebrew.' >> $1
+  echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> $1
 }
 
 main() {
