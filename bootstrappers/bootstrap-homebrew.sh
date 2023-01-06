@@ -19,10 +19,11 @@ main() {
 
   if ! type -t brew; then
     >&2 echo "Downloading and installing Homebrew";
-    NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    NONINTERACTIVE=1 chsh -s "$(/bin/bash -c curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     if [ ! $? -eq 0 ] 
     then
-        exit "Failed to install Homebrew"
+        info "Failed to install Homebrew"
+        exit 1
     fi
   fi;
 
