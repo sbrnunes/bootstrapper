@@ -42,7 +42,7 @@ main() {
           chsh -s $(which zsh)
 
           info "Applying .zhrc from ../templates"; # -------------------------------------------------------------------------
-          cp ../templates/.zshrc.sample $HOME/.zshrc
+          cp ./templates/.zshrc.sample $HOME/.zshrc
 
           if grep -q "source $HOME/env.sh" "$HOME/.zshrc"
           then
