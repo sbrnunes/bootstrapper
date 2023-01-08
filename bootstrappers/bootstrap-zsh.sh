@@ -42,20 +42,28 @@ main() {
           info "Making sure the proper shell is being used..."; # -------------------------------------------------------------------------
           chsh -s $(which zsh)
 
-          info "Applying .zhrc from ../templates"; # -------------------------------------------------------------------------
+          info "Copying .zhrc from ./templates"; # -------------------------------------------------------------------------
           cp ./templates/.zshrc.sample $HOME/.zshrc
 
-          if grep -q "source $HOME/env.sh" "$HOME/.zshrc"
+          grep -q "source $HOME/env.sh" "$HOME/.zshrc"
+          if [ $? != 0 ]
           then
-            info "Already sourcing $HOME/env.sh"
-          else
             echo source $HOME/env.sh >> $HOME/.zshrc
           fi
 
-          echo "export ZSH_THEME=pygmalion" >> $HOME/env.sh
-          echo "autoload -U compinit && compinit" >> $HOME/env.sh
+          grep -q "export ZSH_THEME=pygmalion" "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo "export ZSH_THEME=pygmalion" >> $HOME/env.sh
+          fi
 
-          source $HOME/.zshrc
+          grep -q "autoload -U compinit && compinit" "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo "autoload -U compinit && compinit" >> $HOME/env.sh
+          fi
+
+          info "Restart the terminal to loah Zsh."
         fi
         break;
       ;;
