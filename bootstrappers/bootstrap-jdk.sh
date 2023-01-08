@@ -2,6 +2,8 @@
 
 scriptName="$(basename "$0")";
 
+DEFAULT_JDK_VERSION=11
+
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
@@ -27,7 +29,13 @@ main() {
         else
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
-          brew install openjdk@11
+          info "Installing openjdk 11..."
+          brew install openjdk@$DEFAULT_JDK_VERSION
+
+          info "Symlinking openjdk from Homebrew so that system java wrappers can find it ..."
+          sudo ln -sfn /opt/homebrew/opt/openjdk@$DEFAULT_JDK_VERSION/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-$DEFAULT_JDK_VERSION.jdk
+
+          info "Installing jEnv..."
           brew install jenv
 
           grep -q 'eval "$(jenv init -)"' "$HOME/env.sh"
@@ -40,10 +48,11 @@ main() {
 
           eval "$(jenv init -)"
 
-          # If the ~/.jenv/versions folder is empty, add all of the current JDK installations into jenv.
+          info "Adding Java Virtual Machines from /Library/Java/JavaVirtualMachines to jEnv..."
           if [ -z "$(find "${HOME}/.jenv/versions" -mindepth 1 -maxdepth 1 -print -quit 2> /dev/null)" ]; then
             while IFS= read -r -d $'\n' jdk; do
               if [ -d "${jdk}/Contents/Home/bin" ]; then
+                info "Adding ${jdk}..."
                 jenv add "${jdk}/Contents/Home";
               fi;
             done < <(find /Library/Java/JavaVirtualMachines -type d -maxdepth 1 -mindepth 1 -print);
