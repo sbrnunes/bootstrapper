@@ -58,11 +58,8 @@ main() {
             done < <(find /Library/Java/JavaVirtualMachines -maxdepth 1 -mindepth 1 -print);
           fi;
 
-          # Default to Java 11.
-          if [ ! -r "${HOME}/.jenv/version" ]; then
-            jenv global 11;
-            jenv rehash;
-          fi;
+          info "jEnv is ready. Use 'jenv versions' to list all the available java versions."
+          info "Use 'jenv help' for help with using this tool."
         fi
         break;
       ;;
