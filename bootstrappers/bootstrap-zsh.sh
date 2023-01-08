@@ -40,6 +40,14 @@ main() {
           /bin/bash -c "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions)"
 
           info "Making sure the proper shell is being used..."; # -------------------------------------------------------------------------
+          
+          grep -q "$(which zsh)" "/etc/shells"
+          if [ $? != 0 ]
+          then
+            info "Registering $(which zsh)" in /etc/shells
+            sudo echo "$(which zsh)" >> /etc/shells
+          fi
+          
           chsh -s $(which zsh)
 
           info "Copying .zhrc from ./templates"; # -------------------------------------------------------------------------
