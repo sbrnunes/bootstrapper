@@ -44,8 +44,8 @@ main() {
           grep -q "$(which zsh)" "/etc/shells"
           if [ $? != 0 ]
           then
-            info "Registering $(which zsh)" in /etc/shells
-            sudo echo "$(which zsh)" >> /etc/shells
+            info "Registering $(which zsh) in /etc/shells..."
+            sudo sh -c "echo $(which zsh) >> /etc/shells"
           fi
           
           chsh -s $(which zsh)
