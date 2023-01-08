@@ -75,6 +75,7 @@ main() {
           watch
           wget
           fzf
+          gnupg
         );
         
         brew install "${PACKAGES[@]}";
