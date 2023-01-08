@@ -31,7 +31,8 @@ main() {
           brew install zsh
 
           info "Installing Oh My Zsh..."; # -------------------------------------------------------------------------
-          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+
+          /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
           info "Installing plugins..."; # -------------------------------------------------------------------------
           /bin/bash -c "$(git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting)"
