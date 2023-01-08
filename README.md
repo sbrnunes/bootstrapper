@@ -1,6 +1,6 @@
 # MacOS Bootstraper
 
-A tool providing a bunch of generic boostrappers a local machine enviroment.
+A tool providing a bunch of generic boostrappers to configure a development enviroment focused on MacOS.
 
 ## Usage:
 
