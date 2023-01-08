@@ -55,7 +55,7 @@ main() {
                 info "Adding ${jdk}..."
                 jenv add "${jdk}/Contents/Home";
               fi;
-            done < <(find /Library/Java/JavaVirtualMachines -type d -maxdepth 1 -mindepth 1 -print);
+            done < <(find /Library/Java/JavaVirtualMachines -maxdepth 1 -mindepth 1 -print);
           fi;
 
           # Default to Java 11.
