@@ -15,7 +15,7 @@ info() {
 
 main() {
   init_logger
-  info "This bootstrapper is going to download and install Ruby and rbenv via Homebrew"; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to download and install the JDK and jenv via Homebrew"; # -------------------------------------------------------------------------
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
