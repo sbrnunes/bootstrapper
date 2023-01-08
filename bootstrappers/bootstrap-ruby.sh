@@ -32,8 +32,11 @@ main() {
           grep -q 'eval "$(rbenv init -)"' "$HOME/env.sh"
           if [ $? != 0 ]
           then
+            echo '### Ruby' >> $HOME/env.sh
             echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
           fi
+
+          eval "$(rbenv init -)"
           
           info "Restart the terminal to load rbenv."
         fi

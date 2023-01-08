@@ -30,11 +30,15 @@ main() {
           brew install openjdk@11
           brew install jenv
 
-          echo '### jEnv' >> $HOME/env.sh
-          echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> $HOME/env.sh
-          echo 'eval "$(jenv init -)"' >> $HOME/env.sh
+          grep -q 'eval "$(jenv init -)"' "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo '### JDK' >> $HOME/env.sh
+            echo 'export PATH="$HOME/.jenv/bin:$PATH"' >> $HOME/env.sh
+            echo 'eval "$(jenv init -)"' >> $HOME/env.sh
+          fi
 
-          source $HOME/env.sh
+          eval "$(jenv init -)"
 
           # If the ~/.jenv/versions folder is empty, add all of the current JDK installations into jenv.
           if [ -z "$(find "${HOME}/.jenv/versions" -mindepth 1 -maxdepth 1 -print -quit 2> /dev/null)" ]; then
