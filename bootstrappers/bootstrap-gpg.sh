@@ -22,21 +22,22 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        read -p "$prefix Type in your Real Name" name
-        read -p "$prefix Type in your Email" email
-        read -p "$prefix Type in a Passphrase" passphrase
+        read -p "$prefix Type in your Real Name: " name
+        read -p "$prefix Type in your Email: " email
+        read -s -p "$prefix Type in a Passphrase: " passphrase
 
         # Based on https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html#Unattended-GPG-key-generation
 
         info "Generating GPG key..."
-        gpg --batch --gen-key <<EOF
-        Key-Type: 1
-        Key-Length: 4096
-        Name-Real: $name
-        Name-Email: $email
-        Expire-Date: 0
-        Passphrase: $passphrase
-        EOF
+:wq
+        gpg --batch --gen-key <<END
+    Key-Type: 1
+    Key-Length: 4096
+    Name-Real: ${name}
+    Name-Email: ${email}
+    Expire-Date: 0
+    Passphrase: ${passphrase}
+END
 
         info "Listing all GPG keys..."
         gpg --list-secret-keys --keyid-format=long

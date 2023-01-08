@@ -21,6 +21,9 @@ iterm:  ## Installs iTerm2
 zsh:  ## Installs Z Shell
 	./bootstrappers/bootstrap-zsh.sh
 
+gpg:  ## Generates a GPG key according to some standards
+	./bootstrappers/bootstrap-gpg.sh
+
 vscode:  ## Installs Visual Studio Code
 	./bootstrappers/bootstrap-vscode.sh
 
