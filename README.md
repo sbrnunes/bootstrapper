@@ -2,19 +2,28 @@
 
 A tool providing a bunch of generic boostrappers to configure a development enviroment focused on MacOS.
 
-## Usage:
+
+## Usage
+
+This tool provides a single script that will iterate through all the provided bootstrappers and execute each of them, sequentially.
+
+It can be run multiple times. All bootstrappers should be checking if the target changes have been made, or simply replacing these changes with the same outcome.
+
+As an alternative, each boostrapper can be run independently. See below how.
+
+Here's a list of all the steps needed:
 
 1. Clone the GitHub repo:
-```bash
-git clone git@github.com:sbrnunes/bootstrapper.git
-```
-2. Edit the config file and keep only the boostrappers to run
+    ```bash
+    git clone git@github.com:sbrnunes/bootstrapper.git
+    ```
+2. Edit the config file and select just the boostrappers to run
 3. Execute the main script at the root of the project:
-```
-./boostrap.sh
-```
+    ```
+    ./boostrap.sh
+    ```
 
-Most of the boostrappers will ask for user confirmation at the beggining before making any changes on the machine.
+Note that most of the boostrappers will ask for user confirmation at the beggining before making any changes on the machine.
 
 ## Supported bootstrappers
 
