@@ -53,6 +53,12 @@ main() {
           info "Copying .zhrc from ./templates"; # -------------------------------------------------------------------------
           cp ./templates/.zshrc.sample $HOME/.zshrc
 
+          grep -q "autoload -U compinit && compinit" "$HOME/.zshrc"
+          if [ $? != 0 ]
+          then
+            echo "autoload -U compinit && compinit" >> $HOME/.zshrc
+          fi
+
           grep -q "source $HOME/env.sh" "$HOME/.zshrc"
           if [ $? != 0 ]
           then
@@ -63,12 +69,6 @@ main() {
           if [ $? != 0 ]
           then
             echo "export ZSH_THEME=pygmalion" >> $HOME/env.sh
-          fi
-
-          grep -q "autoload -U compinit && compinit" "$HOME/env.sh"
-          if [ $? != 0 ]
-          then
-            echo "autoload -U compinit && compinit" >> $HOME/env.sh
           fi
 
           info "Restart the terminal to loah Zsh."
