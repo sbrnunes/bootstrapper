@@ -28,9 +28,14 @@ main() {
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
           brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-          echo '### rbenv' $HOME/env.sh
-          echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
-          source $HOME/env.sh
+
+          grep -q 'eval "$(rbenv init -)"' "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
+          fi
+          
+          info "Restart the terminal to load rbenv."
         fi
         break;
       ;;
