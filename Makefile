@@ -32,3 +32,6 @@ ruby:  ## Installs Ruby and rbenv
 
 jdk:  ## Installs OpenJDK 11 and jenv
 	./bootstrappers/bootstrap-jdk.sh
+
+docker:  ## Installs Docker for Mac
+	./bootstrappers/bootstrap-docker.sh
