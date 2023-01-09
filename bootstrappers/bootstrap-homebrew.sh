@@ -38,8 +38,8 @@ main() {
     case $answer in
       [Yy])
         SUDO_USER=$(whoami);
-
-        if ! type -t brew; then
+        if [[ $(type -t brew) = "" ]] && [ ! -f /opt/homebrew/bin/brew ]
+        then
           info "Downloading and installing brew"; # -------------------------------------------------------------
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
           if [ ! $? -eq 0 ] 
