@@ -98,3 +98,12 @@ Can be executed independently with:
 ```bash
 ./bootstrappers/bootstrap-jdk.sh
 ```
+
+### Docker
+
+Installs and starts Docker for Mac.
+
+Can be executed independently with:
+```bash
+./bootstrappers/bootstrap-docker.sh
+```
