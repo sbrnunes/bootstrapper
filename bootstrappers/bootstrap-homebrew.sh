@@ -65,7 +65,7 @@ main() {
           grafana
           jq
           kubernetes-cli
-          kubernetes-helm
+          helm
           node
           openssl
           python3
@@ -76,6 +76,8 @@ main() {
           wget
           fzf
           gnupg
+          asdf
+          bash
         );
         
         brew install "${PACKAGES[@]}";
