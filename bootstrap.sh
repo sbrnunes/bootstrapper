@@ -27,7 +27,6 @@ main() {
           bootstrappers=$(cat ./groups/$group/config)
           for bootstrapper in $bootstrappers
           do
-            info "Running boostrapper $bootstrapper for group $group"
             /bin/bash -c "./bootstrappers/$bootstrapper/bootstrap.sh $group";
           done
           break;
