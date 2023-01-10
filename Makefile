@@ -8,33 +8,3 @@ help:  ## Display this help.
 
 all: ## Installs all the tools supported by this project
 	./bootstrap.sh
-
-xcode:  ## Installs XCode Command Line Tools
-	./bootstrappers/xcode/bootstrap.sh
-
-homebrew:  ## Installs Homebrew
-	./bootstrappers/homebrew/bootstrap.sh
-
-iterm:  ## Installs iTerm2
-	./bootstrappers/iterm/bootstrap.sh
-
-zsh:  ## Installs Z Shell
-	./bootstrappers/zsh/bootstrap.sh
-
-git:  ## Install and configures Git
-	./bootstrappers/git/bootstrap.sh
-
-gpg:  ## Generates a GPG key according to some standards
-	./bootstrappers/gpg/bootstrap.sh
-
-vscode:  ## Installs Visual Studio Code
-	./bootstrappers/vscode/bootstrap.sh
-
-ruby:  ## Installs Ruby and rbenv
-	./bootstrappers/ruby/bootstrap.sh
-
-jdk:  ## Installs OpenJDK 11 and jenv
-	./bootstrappers/jdk/bootstrap.sh
-
-docker:  ## Installs Docker for Mac
-	./bootstrappers/docker/bootstrap.sh

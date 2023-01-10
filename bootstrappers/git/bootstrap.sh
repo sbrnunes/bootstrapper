@@ -18,7 +18,7 @@ info() {
 main() {
   init_logger
   info "Running '$bootstrapper' for group '$group'"
-  info "This bootstrapper is going to install Git and setup the authentication."; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to install Git and setup the authentication.";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
@@ -96,15 +96,6 @@ EOM
       ;;
     esac
   done
-
-
-
-  init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  
-
-  
-
 }
 
 main "$@";
