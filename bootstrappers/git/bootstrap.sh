@@ -61,6 +61,7 @@ EOM
 
           read -s -p "$prefix Token: " token
 
+          info "Setting GITHUB_TOKEN...";
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
           then
@@ -70,6 +71,9 @@ EOM
             sed -i "s/export.*GITHUB_TOKEN.*/export GITHUB_TOKEN=$token/" $HOME/env.sh
           fi
 
+          export GITHUB_TOKEN=$token
+
+          info "Setting HOMEBREW_GITHUB_API_TOKEN...";
           grep -q "HOMEBREW_GITHUB_API_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
           then
@@ -79,6 +83,9 @@ EOM
             sed -i "s/export.*HOMEBREW_GITHUB_API_TOKEN.*/export HOMEBREW_GITHUB_API_TOKEN=$token/" $HOME/env.sh
           fi
 
+          export HOMEBREW_GITHUB_API_TOKEN=$token
+
+          info "Setting BUNDLE_GITHUB__COM...";
           grep -q "BUNDLE_GITHUB__COM" "$HOME/env.sh"
           if [ $? != 0 ]
           then
@@ -87,6 +94,8 @@ EOM
           else
             sed -i "s/export.*BUNDLE_GITHUB__COM.*/export BUNDLE_GITHUB__COM=$token/" $HOME/env.sh
           fi
+
+          export BUNDLE_GITHUB__COM=$token
         fi
         break;
       ;;
