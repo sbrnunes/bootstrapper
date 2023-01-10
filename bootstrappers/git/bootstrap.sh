@@ -34,13 +34,13 @@ main() {
           brew install git
 
           info "Setting global configuration...";
-          read -p "$prefix Enter your name (to be displayed in commits) :" name
-          read -p "$prefix Enter your email (to be used with your commits)  :" email
+          read -p "$prefix Enter your name (to be displayed in commits): " name
+          read -p "$prefix Enter your email (to be used with your commits): " email
 
           git config --global user.name $name
           git config --global user.email $email
 
-          read -r -d '' text <<- EOM
+          text=$(cat << EOM
   Create a personal access token in https://github.com/settings/tokens with the following scopes and paste it below: 
   - repo
     - repo:status
@@ -57,9 +57,10 @@ main() {
   - user
     - user:email
 EOM
+)
 
           info $text
-          read -s "$prefix Token :" token
+          read -s "$prefix Token: " token
 
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
