@@ -24,28 +24,50 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        read -p "$prefix Type in your Real Name: " name
-        read -p "$prefix Type in your Email: " email
-        read -s -p "$prefix Type in a Passphrase: " passphrase
+        if [[ $(type -t brew) = "" ]] && [ ! -f /opt/homebrew/bin/brew ]
+        then
+            info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
+        else
+          info "Installing gnupg..."
+          brew install gnupg
 
-        # Based on https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html#Unattended-GPG-key-generation
+          grep -q "GPG_TTY" "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo "### gnupg"
+            echo "export GPG_TTY=$(tty)" >> $HOME/env.sh
+          fi
 
-        info "Generating GPG key..."
-:wq
-        gpg --batch --gen-key <<END
-    Key-Type: 1
-    Key-Length: 4096
-    Name-Real: ${name}
-    Name-Email: ${email}
-    Expire-Date: 0
-    Passphrase: ${passphrase}
+          info "Generating GPG key..."
+          read -p "$prefix Type in your Real Name: " name
+          read -p "$prefix Type in your Email: " email
+          read -s -p "$prefix Type in a Passphrase: " passphrase
+
+          # Based on https://www.gnupg.org/documentation/manuals/gnupg/Unattended-GPG-key-generation.html#Unattended-GPG-key-generation
+          gpg --batch --gen-key << END
+  Key-Type: 1
+  Key-Length: 4096
+  Name-Real: ${name}
+  Name-Email: ${email}
+  Expire-Date: 0
+  Passphrase: ${passphrase}
 END
 
-        info "Listing all GPG keys..."
-        gpg --list-secret-keys --keyid-format=long
+          info "Fetching the key id..."
+          key_id=$( gpg --list-secret-keys --with-colons | awk -F: '/^sec:/ { print $5 }' | tail -1 )
 
-        info "Run 'gpg --armor --export <id>' to get the public certificate."
+          info "Exporting the public certificate key $key_id..."
+          publick_key=$(gpg --armor --export $key_id)
 
+          info "Pushing the public certificate to GitHub..."
+          curl \
+          -X POST \
+          -H "Accept: application/vnd.github+json" \
+          -H "Authorization: Bearer $(echo $GITHUB_TOKEN)"\
+          -H "X-GitHub-Api-Version: 2022-11-28" \
+          https://api.github.com/user/gpg_keys \
+          -d '{"name":"Octocat'\''s GPG Key","armored_public_key":"'$public_key'"}'
+        fi
         break;
       ;;
       [Nn]) 
