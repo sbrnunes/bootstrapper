@@ -60,7 +60,7 @@ EOM
 )
 
           info $text
-          read -s "$prefix Token: " token
+          read -s -p "$prefix Token: " token
 
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
