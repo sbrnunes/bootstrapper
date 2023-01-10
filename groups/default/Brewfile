@@ -1,8 +1,8 @@
-brew cask
-brew git
-brew jq
-brew tree
-brew watch
-brew wget
-brew fzf
-brew bash
+brew "cask"
+brew "git"
+brew "jq"
+brew "tree"
+brew "watch"
+brew "wget"
+brew "fzf"
+brew "bash"

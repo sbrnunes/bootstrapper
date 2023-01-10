@@ -59,7 +59,8 @@ main() {
         brew update;
 
         info "Installing required packages...";
-        brew bundle --file="../../groups/$group/Brewfile"
+        brew tap Homebrew/bundle
+        brew bundle --file="./groups/$group/Brewfile"
 
         brew cleanup;
         break;
