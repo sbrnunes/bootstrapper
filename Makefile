@@ -22,10 +22,10 @@ zsh:  ## Installs Z Shell
 	./bootstrappers/zsh/bootstrap.sh
 
 git:  ## Install and configures Git
-	./bootstrappers/bootstrap-git.sh
+	./bootstrappers/git/bootstrap.sh
 
 gpg:  ## Generates a GPG key according to some standards
-	./bootstrappers/bootstrap-gpg.sh
+	./bootstrappers/gpg/bootstrap.sh
 
 vscode:  ## Installs Visual Studio Code
 	./bootstrappers/vscode/bootstrap.sh
