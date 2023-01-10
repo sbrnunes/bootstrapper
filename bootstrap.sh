@@ -6,7 +6,7 @@ init_logger() {
   local cols=$(tput cols);
   local len=${#1};
   local prefixLen=${#prefix};
-  prefix="$(tput setaf 13)[${scriptName}]$(tput sgr0)"
+  prefix="$(tput setaf 13)[./${scriptName}]$(tput sgr0)"
 }
 
 info() {
@@ -15,28 +15,30 @@ info() {
 
 main() {
   shopt -u nullglob
-
   init_logger
-  info "This script will bootstrap some common tools. Would you like to continue?";
-  info "Would you like to continue?"
-  while true; do
-    read -p "$prefix Enter [y|n]: " answer
-    case $answer in
-      [Yy])
-        bootstrappers=$(cat config)
-        for bootstrapper in $bootstrappers
-        do
-           /bin/bash -c ./bootstrappers/bootstrap-$bootstrapper.sh;
-        done
-        break;
-      ;;
-      [Nn])
-        info "Skipping...";
-        break;
-      ;;
-    esac
+  groups=$(cat config)
+  for group in $groups
+  do
+    info "Boostrapping group $group. Would you like to continue?"
+    while true; do
+      read -p "$prefix Enter [y|n]: " answer
+      case $answer in
+        [Yy])
+          bootstrappers=$(cat ./groups/$group/config)
+          for bootstrapper in $bootstrappers
+          do
+            info "Running boostrapper $bootstrapper for group $group"
+            /bin/bash -c "./bootstrappers/$bootstrapper/bootstrap.sh $group";
+          done
+          break;
+        ;;
+        [Nn])
+          info "Skipping...";
+          break;
+        ;;
+      esac
+    done
   done
-
   shopt -u nullglob
 }
 

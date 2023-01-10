@@ -1,14 +1,14 @@
 #!/usr/bin/env bash
 
 scriptName="$(basename "$0")";
-
-DEFAULT_JDK_VERSION=11
+bootstrapper="$(basename "$(dirname "$0")")"
+group="$1"
 
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
   local prefixLen=${#prefix};
-  prefix="$(tput setaf 13)[${scriptName}]$(tput sgr0)"
+  prefix="$(tput setaf 13)[./bootstrappers/${bootstrapper}/${scriptName}]$(tput sgr0)"
 }
 
 info() {
@@ -17,6 +17,7 @@ info() {
 
 main() {
   init_logger
+  info "Running '$bootstrapper' for group '$group'"
   info "This bootstrapper is going to download and install the JDK and jenv via Homebrew"; # -------------------------------------------------------------------------
   info "Would you like to continue?"
   while true; do

@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 scriptName="$(basename "$0")";
+bootstrapper="$(basename "$(dirname "$0")")"
+group="$1"
 
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
   local prefixLen=${#prefix};
-  prefix="$(tput setaf 13)[${scriptName}]$(tput sgr0)"
+  prefix="$(tput setaf 13)[./bootstrappers/${bootstrapper}/${scriptName}]$(tput sgr0)"
 }
 
 info() {
@@ -31,6 +33,7 @@ init_brew() {
 
 main() {
   init_logger
+  info "Running '$bootstrapper' for group '$group'"
   info "This bootstrapper is going to install homebrew and some base packages."; # -------------------------------------------------------------------------
   info "Would you like to continue?"
   while true; do
@@ -55,32 +58,8 @@ main() {
 
         brew update;
 
-        info "Installing some base packages...";
-
-        PACKAGES=(
-          awscli
-          cask
-          cookiecutter
-          git
-          grafana
-          jq
-          kubernetes-cli
-          helm
-          node
-          openssl
-          python3
-          pyenv
-          terraform
-          tree
-          watch
-          wget
-          fzf
-          gnupg
-          asdf
-          bash
-        );
-        
-        brew install "${PACKAGES[@]}";
+        info "Installing required packages...";
+        brew bundle --file="../../groups/$group/Brewfile"
 
         brew cleanup;
         break;

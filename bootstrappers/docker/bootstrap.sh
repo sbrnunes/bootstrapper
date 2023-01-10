@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 scriptName="$(basename "$0")";
+bootstrapper="$(basename "$(dirname "$0")")"
+group="$1"
 
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
   local prefixLen=${#prefix};
-  prefix="$(tput setaf 13)[${scriptName}]$(tput sgr0)"
+  prefix="$(tput setaf 13)[./bootstrappers/${bootstrapper}/${scriptName}]$(tput sgr0)"
 }
 
 info() {
@@ -15,7 +17,8 @@ info() {
 
 main() {
   init_logger
-  info "This bootstrapper is going to download and install VSCode via Homebrew"; # -------------------------------------------------------------------------
+  info "Running '$bootstrapper' for group '$group'"
+  info "This bootstrapper is going to install and start Docker for Mac";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
@@ -27,8 +30,11 @@ main() {
         else
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
-          info "Installing VScode"; # -------------------------------------------------------------
-          brew install --cask visual-studio-code
+          info "Installing Docker";
+          brew install --cask docker
+
+          info "Starting Docker";
+          open /Applications/Docker.app
         fi
         break;
       ;;

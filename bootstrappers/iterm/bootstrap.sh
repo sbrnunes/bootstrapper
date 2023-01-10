@@ -1,12 +1,14 @@
 #!/usr/bin/env bash
 
 scriptName="$(basename "$0")";
+bootstrapper="$(basename "$(dirname "$0")")"
+group="$1"
 
 init_logger() {
   local cols=$(tput cols);
   local len=${#1};
   local prefixLen=${#prefix};
-  prefix="$(tput setaf 13)[${scriptName}]$(tput sgr0)"
+  prefix="$(tput setaf 13)[./bootstrappers/${bootstrapper}/${scriptName}]$(tput sgr0)"
 }
 
 info() {
@@ -15,7 +17,8 @@ info() {
 
 main() {
   init_logger
-  info "This bootstrapper is going to download and install Ruby and rbenv via Homebrew"; # -------------------------------------------------------------------------
+  info "Running '$bootstrapper' for group '$group'"
+  info "This bootstrapper is going to download and install iterm2 via Homebrew."; # -------------------------------------------------------------------------
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
@@ -27,18 +30,10 @@ main() {
         else
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
-          brew install rbenv ruby-build rbenv-default-gems rbenv-gemset
-
-          grep -q 'eval "$(rbenv init -)"' "$HOME/env.sh"
-          if [ $? != 0 ]
-          then
-            echo '### Ruby' >> $HOME/env.sh
-            echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
-          fi
-
-          eval "$(rbenv init -)"
-          
-          info "Restart the terminal to load rbenv."
+          info "Installing iterm2"; # -------------------------------------------------------------------------
+          brew install --cask iterm2
+          brew tap homebrew/cask-fonts
+          brew install --cask font-source-code-pro
         fi
         break;
       ;;
