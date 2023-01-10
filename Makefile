@@ -10,28 +10,28 @@ all: ## Installs all the tools supported by this project
 	./bootstrap.sh
 
 xcode:  ## Installs XCode Command Line Tools
-	./bootstrappers/bootstrap-xcode.sh
+	./bootstrappers/xcode/bootstrap.sh
 
 homebrew:  ## Installs Homebrew
-	./bootstrappers/bootstrap-homebrew.sh
+	./bootstrappers/homebrew/bootstrap.sh
 
 iterm:  ## Installs iTerm2
-	./bootstrappers/bootstrap-iterm.sh
+	./bootstrappers/iterm/bootstrap.sh
 
 zsh:  ## Installs Z Shell
-	./bootstrappers/bootstrap-zsh.sh
+	./bootstrappers/zsh/bootstrap.sh
 
 gpg:  ## Generates a GPG key according to some standards
 	./bootstrappers/bootstrap-gpg.sh
 
 vscode:  ## Installs Visual Studio Code
-	./bootstrappers/bootstrap-vscode.sh
+	./bootstrappers/vscode/bootstrap.sh
 
 ruby:  ## Installs Ruby and rbenv
-	./bootstrappers/bootstrap-ruby.sh
+	./bootstrappers/ruby/bootstrap.sh
 
 jdk:  ## Installs OpenJDK 11 and jenv
-	./bootstrappers/bootstrap-jdk.sh
+	./bootstrappers/jdk/bootstrap.sh
 
 docker:  ## Installs Docker for Mac
-	./bootstrappers/bootstrap-docker.sh
+	./bootstrappers/docker/bootstrap.sh

@@ -33,7 +33,7 @@ Generates a private/public key pair, automaticaly loads the private key into the
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-ssh.sh
+./bootstrappers/ssh/bootstrap.sh
 ```
 
 ### XCode
@@ -42,7 +42,7 @@ XCode Command Line Tools is a dependency to install Homebrew.
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-xcode.sh
+./bootstrappers/xcode/bootstrap.sh
 ```
 
 ### Homebrew
@@ -51,7 +51,7 @@ One of the most used package managers for MacOS.
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-homebrew.sh
+./bootstrappers/homebrew/bootstrap.sh
 ```
 
 ### iTerm2
@@ -60,7 +60,7 @@ iTerm2 is an open source replacement for Apple's Terminal. It's highly customiza
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-iterm.sh
+./bootstrappers/iterm/bootstrap.sh
 ```
 
 ### Zsh with Oh My Zsh
@@ -69,7 +69,7 @@ The Z shell (also known as zsh) is a Unix shell that is built on top of bash (th
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-zsh.sh
+./bootstrappers/zsh/bootstrap.sh
 ```
 
 ### VScode
@@ -78,7 +78,7 @@ Visual Studio Code is a lightweight code editor with support for many programmin
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-vscode.sh
+./bootstrappers/vscode/bootstrap.sh
 ```
 
 ### Ruby and rbenv
@@ -87,7 +87,7 @@ MacOS comes with Ruby installed, but this bootstrapper installs ruby and rbenv v
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-ruby.sh
+./bootstrappers/ruby/bootstrap.sh
 ```
 
 ### JDK and jEnv
@@ -96,7 +96,7 @@ Using Java to build software applications requires the installation of a JDK ("J
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-jdk.sh
+./bootstrappers/jdk/bootstrap.sh
 ```
 
 ### Docker
@@ -105,5 +105,5 @@ Installs and starts Docker for Mac.
 
 Can be executed independently with:
 ```bash
-./bootstrappers/bootstrap-docker.sh
+./bootstrappers/docker/bootstrap.sh
 ```
