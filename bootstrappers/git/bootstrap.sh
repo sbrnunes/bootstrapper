@@ -68,7 +68,7 @@ EOM
             echo "### GitHub Token for GitHub API" >> $HOME/env.sh
             echo "export GITHUB_TOKEN=$token" >> $HOME/env.sh
           else
-            sed -i "s/export.*GITHUB_TOKEN.*/export GITHUB_TOKEN=$token/" $HOME/env.sh
+            sed -i '' -e "s/export.*GITHUB_TOKEN.*/export GITHUB_TOKEN=$token/g" $HOME/env.sh
           fi
 
           export GITHUB_TOKEN=$token
@@ -80,7 +80,7 @@ EOM
             echo "### GitHub Token for Homebrew" >> $HOME/env.sh
             echo "export HOMEBREW_GITHUB_API_TOKEN=$token" >> $HOME/env.sh
           else
-            sed -i "s/export.*HOMEBREW_GITHUB_API_TOKEN.*/export HOMEBREW_GITHUB_API_TOKEN=$token/" $HOME/env.sh
+            sed -i '' -e "s/export.*HOMEBREW_GITHUB_API_TOKEN.*/export HOMEBREW_GITHUB_API_TOKEN=$token/g" $HOME/env.sh
           fi
 
           export HOMEBREW_GITHUB_API_TOKEN=$token
@@ -92,7 +92,7 @@ EOM
             echo "### GitHub Token for bundler / asdf" >> $HOME/env.sh
             echo "export BUNDLE_GITHUB__COM=$token" >> $HOME/env.sh
           else
-            sed -i "s/export.*BUNDLE_GITHUB__COM.*/export BUNDLE_GITHUB__COM=$token/" $HOME/env.sh
+            sed -i '' -e "s/export.*BUNDLE_GITHUB__COM.*/export BUNDLE_GITHUB__COM=$token/g" $HOME/env.sh
           fi
 
           export BUNDLE_GITHUB__COM=$token
