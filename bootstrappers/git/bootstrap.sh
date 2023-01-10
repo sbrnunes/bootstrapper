@@ -40,8 +40,8 @@ main() {
           git config --global user.name $name
           git config --global user.email $email
 
-          text=$(cat << EOM
-  Create a personal access token in https://github.com/settings/tokens with the following scopes and paste it below: 
+          info "Create a personal access token in https://github.com/settings/tokens with the following scopes and paste it below:"
+          echo "$(cat <<- EOM
   - repo
     - repo:status
     - repo_deployment
@@ -57,15 +57,14 @@ main() {
   - user
     - user:email
 EOM
-)
+          )"
 
-          info $text
           read -s -p "$prefix Token: " token
 
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
           then
-            echo "### GitHub Token for GitHub API"
+            echo "### GitHub Token for GitHub API" >> $HOME/env.sh
             echo "export GITHUB_TOKEN=$token" >> $HOME/env.sh
           else
             sed -i "s/export.*GITHUB_TOKEN.*/export GITHUB_TOKEN=$token/" $HOME/env.sh
@@ -74,7 +73,7 @@ EOM
           grep -q "HOMEBREW_GITHUB_API_TOKEN" "$HOME/env.sh"
           if [ $? != 0 ]
           then
-            echo "### GitHub Token for Homebrew"
+            echo "### GitHub Token for Homebrew" >> $HOME/env.sh
             echo "export HOMEBREW_GITHUB_API_TOKEN=$token" >> $HOME/env.sh
           else
             sed -i "s/export.*HOMEBREW_GITHUB_API_TOKEN.*/export HOMEBREW_GITHUB_API_TOKEN=$token/" $HOME/env.sh
@@ -83,7 +82,7 @@ EOM
           grep -q "BUNDLE_GITHUB__COM" "$HOME/env.sh"
           if [ $? != 0 ]
           then
-            echo "### GitHub Token for bundler / asdf"
+            echo "### GitHub Token for bundler / asdf" >> $HOME/env.sh
             echo "export BUNDLE_GITHUB__COM=$token" >> $HOME/env.sh
           else
             sed -i "s/export.*BUNDLE_GITHUB__COM.*/export BUNDLE_GITHUB__COM=$token/" $HOME/env.sh
