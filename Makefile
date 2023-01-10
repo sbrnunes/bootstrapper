@@ -21,6 +21,9 @@ iterm:  ## Installs iTerm2
 zsh:  ## Installs Z Shell
 	./bootstrappers/zsh/bootstrap.sh
 
+git:  ## Install and configures Git
+	./bootstrappers/bootstrap-git.sh
+
 gpg:  ## Generates a GPG key according to some standards
 	./bootstrappers/bootstrap-gpg.sh
 
