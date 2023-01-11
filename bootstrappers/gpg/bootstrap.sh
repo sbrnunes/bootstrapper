@@ -78,7 +78,7 @@ END
             -H "Authorization: Bearer $GITHUB_TOKEN"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/user/gpg_keys \
-            -d '{"name":"$key_name","armored_public_key":"-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n'$public_key'\n-----END PGP PUBLIC KEY BLOCK-----"}'
+            -d '{"name":"'$key_name'","armored_public_key":"-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n'$public_key'\n-----END PGP PUBLIC KEY BLOCK-----"}'
           else
             if [[ -z "${GITHUB_TOKEN}" ]]
             then
