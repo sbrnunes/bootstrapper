@@ -55,11 +55,7 @@ END
 
           info "Fetching the key id..."
           key_id=$( gpg --list-secret-keys --with-colons | awk -F: '/^sec:/ { print $5 }' | tail -1 )
-
-          info "Exporting the public certificate key $key_id..."
           public_key=$(gpg --armor --export $key_id | awk 'NF {sub(/\r/, ""); printf "%s",$0;}' | sed -E 's/-----(BEGIN|END) PGP PUBLIC KEY BLOCK-----//g')
-
-	  info "Using github token: $GITHUB_TOKEN"
 
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
           if [ $? == 0 ]
@@ -70,7 +66,7 @@ END
               source $HOME/env.sh
             fi
 
-            info "Creating a GPG key in your GitHub User using the public key just created..."
+            info "Creating a GPG key in your GitHub User for key: $key_id..."
             read -p "$prefix Type in the name of this GPG Key: " key_name
             curl \
             -X POST \
@@ -83,7 +79,7 @@ END
             if [[ -z "${GITHUB_TOKEN}" ]]
             then
               info "GITHUB_TOKEN was not found in $HOME/env.sh or in the current shell. Go to https://github.com/settings/keys and create the GPG Key manually using the public key below."
-              echo "$(public_key)"
+              $(gpg --armor --export $key_id)
             fi 
           fi
         fi
