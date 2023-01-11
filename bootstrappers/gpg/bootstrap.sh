@@ -57,10 +57,12 @@ END
           key_id=$( gpg --list-secret-keys --with-colons | awk -F: '/^sec:/ { print $5 }' | tail -1 )
 
           info "Exporting the public certificate key $key_id..."
-          publick_key=$(gpg --armor --export $key_id)
+          public_key=$(gpg --armor --export $key_id | awk 'NF {sub(/\r/, ""); printf "%s",$0;}' | sed -E 's/-----(BEGIN|END) PGP PUBLIC KEY BLOCK-----//g')
+
+	  info "Using github token: $GITHUB_TOKEN"
 
           grep -q "GITHUB_TOKEN" "$HOME/env.sh"
-          if [ $? != 0 ]
+          if [ $? == 0 ]
           then
             if [[ -z "${GITHUB_TOKEN}" ]]
             then
@@ -68,14 +70,21 @@ END
               source $HOME/env.sh
             fi
 
-            info "Pushing the public certificate to GitHub..."
+            info "Creating a GPG key in your GitHub User using the public key just created..."
+            read -p "$prefix Type in the name of this GPG Key: " key_name
             curl \
             -X POST \
             -H "Accept: application/vnd.github+json" \
-            -H "Authorization: Bearer $(echo $GITHUB_TOKEN)"\
+            -H "Authorization: Bearer $GITHUB_TOKEN"\
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/user/gpg_keys \
-            -d '{"name":"Octocat'\''s GPG Key","armored_public_key":"'$public_key'"}' 
+            -d '{"name":"$key_name","armored_public_key":"-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n'$public_key'\n-----END PGP PUBLIC KEY BLOCK-----"}'
+          else
+            if [[ -z "${GITHUB_TOKEN}" ]]
+            then
+              info "GITHUB_TOKEN was not found in $HOME/env.sh or in the current shell. Go to https://github.com/settings/keys and create the GPG Key manually using the public key below."
+              echo "$(public_key)"
+            fi 
           fi
         fi
         break;
