@@ -56,6 +56,8 @@ main() {
   - admin:org_hook
   - user
     - user:email
+  - admin:gpg_key
+    - write:gpg_key
 EOM
           )"
 
