@@ -83,6 +83,7 @@ END
               if [ ! -z "$key_id" ]
               then
                 git config --global user.signingkey $key_id
+                git config --global commit.gpgsign true
                 info "Suceeded enabling git commit signing with GPG key: $key_id$";
               fi
             else
