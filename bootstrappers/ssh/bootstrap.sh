@@ -24,14 +24,10 @@ main() {
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        keys=( $HOME/.ssh/id_ed25519_td* )
+        keys=( $HOME/.ssh/id_* )
 
-        if [[ "${#keys[@]}" -eq 0 ]]
+        if [ ! "$(ls -A $HOME/.ssh/id_*)" ]
         then
-          key_name="$HOME/.ssh/id_ed25519_td_$(date +%Y-%m-%d)"
-
-          info "Generating SSH Key for $(whoami) in $key_name using algorithm ED25519..."
-
           # Creates directory if it does not exist
           if [ ! -d $HOME/.ssh ]
           then
@@ -39,19 +35,26 @@ main() {
             mkdir $HOME/.ssh
           fi
 
+          info "Generating SSH Key for $(whoami) using algorithm ED25519..."
+          key_name="$HOME/.ssh/id_ed25519_td_$(date +%Y-%m-%d)"
           ssh-keygen -t ed25519 -f $key_name -C "Public/Private key for $(whoami)"
+          info "Succeeded generating SSH Key in $key_name."
+
+          info "Generating SSH Key for $(whoami) using algorithm RSA..."
+          rsa_key_name="$HOME/.ssh/id_rsa_td_$(date +%Y-%m-%d)"
+          ssh-keygen -t rsa -f $rsa_key_name -C "Public/Private key for $(whoami)"
+          info "Succeeded generating SSH Key in $rsa_key_name."
 
           info "Securing the ~/.ssh folder and its contents..."
-
           chmod 700 $HOME/.ssh
           chmod 600 $HOME/.ssh/*
           chown -R $USER $HOME/.ssh
 
           info "Adding privates keys to the ssh agent..."
 
-          for file in $HOME/.ssh/id_ed25519_td*
+          for file in $HOME/.ssh/id_*
           do
-	      if [[ ! $file == *.pub ]]
+	          if [[ ! $file == *.pub ]]
               then
                 info "Adding $file..."
                 ssh-add --apple-use-keychain $file
