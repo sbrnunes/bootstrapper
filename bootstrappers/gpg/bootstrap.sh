@@ -75,6 +75,19 @@ END
             -H "X-GitHub-Api-Version: 2022-11-28" \
             https://api.github.com/user/gpg_keys \
             -d '{"name":"'$key_name'","armored_public_key":"-----BEGIN PGP PUBLIC KEY BLOCK-----\n\n'$public_key'\n-----END PGP PUBLIC KEY BLOCK-----"}'
+
+            info "Enabling git commit signing with the latest GPG key...";
+            if command -v git &> /dev/null
+            then
+              key_id=$( gpg --list-secret-keys --with-colons | awk -F: '/^sec:/ { print $5 }' | tail -1 )
+              if [ ! -z "$key_id" ]
+              then
+                git config --global user.signingkey $key_id
+                info "Suceeded enabling git commit signing with GPG key: $key_id$";
+              fi
+            else
+              info "Could not find git in this machine. Install git and then run 'git config --global user.signingkey' $key_id$";
+            fi
           else
             if [[ -z "${GITHUB_TOKEN}" ]]
             then
