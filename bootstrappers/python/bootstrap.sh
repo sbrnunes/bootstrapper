@@ -39,7 +39,7 @@ main() {
           echo "# Python virtualenvwrapper" >> $HOME/env.sh
           echo 'export WORKON_HOME=~/.virtualenvs' >> $HOME/env.sh
           echo 'export VIRTUALENVWRAPPER_PYTHON=$(which python3)' >> $HOME/env.sh
-          echo 'source /usr/local/bin/virtualenvwrapper.sh' >> $HOME/env.sh
+          echo 'source /opt/homebrew/bin/virtualenvwrapper.sh' >> $HOME/env.sh
 
           info "Sourcing ~/env.sh..."
           source $HOME/env.sh
