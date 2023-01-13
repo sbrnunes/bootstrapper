@@ -17,15 +17,20 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "Boostrapping $bootstrapper for group $group"
-  info "This bootstrapper is going to..."; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to...";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
     case $answer in
       [Yy])
-        # Bootstrap...
+        if [[ $(type -t brew) = "" ]] && [ ! -f /opt/homebrew/bin/brew ]
+        then
+            info "Cannot run this bootstrapper. Install required dependency first: Homebrew."
+        else
+          eval "$(/opt/homebrew/bin/brew shellenv)"
+
+          # boostrapping code goes here
+        fi
         break;
       ;;
       [Nn]) 
