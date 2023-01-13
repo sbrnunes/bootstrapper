@@ -38,6 +38,7 @@ main() {
       esac
     done
   done
+  info "Boostrapping completed. Please, restart you terminal!"
   shopt -u nullglob
 }
 
