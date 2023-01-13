@@ -17,8 +17,7 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "This bootstrapper is going to install Zsh and Oh My Zsh via Homebrew."; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to install Zsh and Oh My Zsh via Homebrew.";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
@@ -30,19 +29,19 @@ main() {
         else
           eval "$(/opt/homebrew/bin/brew shellenv)"
 
-          info "Installing Zsh..."; # -------------------------------------------------------------------------
+          info "Installing Zsh...";
           brew install zsh
 
-          info "Installing Oh My Zsh..."; # -------------------------------------------------------------------------
+          info "Installing Oh My Zsh...";
 
           /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
-          info "Installing plugins..."; # -------------------------------------------------------------------------
+          info "Installing plugins...";
           /bin/bash -c "$(git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting)"
           /bin/bash -c "$(git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions)"
           /bin/bash -c "$(git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions)"
 
-          info "Making sure the proper shell is being used..."; # -------------------------------------------------------------------------
+          info "Making sure the proper shell is being used...";
           
           grep -q "$(which zsh)" "/etc/shells"
           if [ $? != 0 ]
@@ -53,7 +52,7 @@ main() {
           
           chsh -s $(which zsh)
 
-          info "Copying .zhrc from ./templates"; # -------------------------------------------------------------------------
+          info "Copying .zhrc from ./templates";
           cp ./templates/.zshrc.sample $HOME/.zshrc
 
           grep -q "autoload -U compinit && compinit" "$HOME/.zshrc"

@@ -33,8 +33,7 @@ init_brew() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "This bootstrapper is going to install homebrew and some base packages."; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to install homebrew and some base packages.";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer

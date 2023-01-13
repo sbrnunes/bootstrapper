@@ -17,7 +17,6 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
   info "This bootstrapper is going to install and start Docker for Mac";
   info "Would you like to continue?"
   while true; do

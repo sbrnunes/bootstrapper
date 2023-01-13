@@ -17,8 +17,7 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "This bootstrapper is going to provision the required ssh keys in your machine."; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to provision the required ssh keys in your machine.";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer

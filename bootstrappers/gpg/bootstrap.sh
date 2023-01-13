@@ -17,8 +17,7 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "This bootstrapper is going to generate a new GPG key"; # -------------------------------------------------------------------------
+  info "This bootstrapper is going to generate a new GPG key";
   info "Would you like to continue?"
   while true; do
     read -p "$prefix Enter [y|n]:" answer
