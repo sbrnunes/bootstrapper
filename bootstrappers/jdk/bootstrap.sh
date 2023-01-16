@@ -2,7 +2,6 @@
 
 scriptName="$(basename "$0")";
 bootstrapper="$(basename "$(dirname "$0")")"
-group="$1"
 
 init_logger() {
   local cols=$(tput cols);

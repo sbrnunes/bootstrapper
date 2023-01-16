@@ -2,7 +2,6 @@
 
 scriptName="$(basename "$0")";
 bootstrapper="$(basename "$(dirname "$0")")"
-group="$1"
 
 init_logger() {
   local cols=$(tput cols);
@@ -17,8 +16,7 @@ info() {
 
 main() {
   init_logger
-  info "Running '$bootstrapper' for group '$group'"
-  info "Checking Command Line Tools for Xcode"
+  info "This bootstrapper is going to download and install Command Line Tools for Xcode.";
 
   # Only run if the tools are not installed yet
   # To check that try to print the SDK path
