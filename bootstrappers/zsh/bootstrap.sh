@@ -2,7 +2,6 @@
 
 scriptName="$(basename "$0")";
 bootstrapper="$(basename "$(dirname "$0")")"
-group="$1"
 
 init_logger() {
   local cols=$(tput cols);
@@ -72,6 +71,12 @@ main() {
           then
             echo "export ZSH_THEME=pygmalion" >> $HOME/env.sh
           fi
+
+          info "Installing fuzzy finder...";
+          brew install fzf
+
+          info "Installing fuzzy finder auto completion and key bindings...";
+          $(brew --prefix)/opt/fzf/install
 
           info "Restart the terminal to loah Zsh."
         fi
