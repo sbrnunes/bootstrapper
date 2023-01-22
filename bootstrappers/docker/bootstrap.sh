@@ -33,6 +33,19 @@ main() {
 
           info "Starting Docker";
           open /Applications/Docker.app
+
+          info "Enabling COMPOSE_DOCKER_CLI_BUILD and DOCKER_BUILDKIT...";
+          grep -q "COMPOSE_DOCKER_CLI_BUILD" "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo 'export COMPOSE_DOCKER_CLI_BUILD=1' >> $HOME/.env.sh
+          fi
+
+          grep -q "DOCKER_BUILDKIT" "$HOME/env.sh"
+          if [ $? != 0 ]
+          then
+            echo 'export DOCKER_BUILDKIT=1' >> $HOME/.env.sh
+          fi
         fi
         break;
       ;;
