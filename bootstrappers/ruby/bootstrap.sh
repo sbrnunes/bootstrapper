@@ -34,6 +34,7 @@ main() {
           if [ $? != 0 ]
           then
             echo '### Ruby' >> $HOME/env.sh
+            echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> $HOME/env.sh
             echo 'eval "$(rbenv init -)"' >> $HOME/env.sh
           fi
 
