@@ -54,6 +54,9 @@ main() {
           info "Copying .zhrc from ./templates";
           cp ./templates/.zshrc.sample $HOME/.zshrc
 
+          info "Copying env.sh from ./templates";
+          cp ./templates/env.sh.sample $HOME/env.sh
+
           grep -q "autoload -U compinit && compinit" "$HOME/.zshrc"
           if [ $? != 0 ]
           then
