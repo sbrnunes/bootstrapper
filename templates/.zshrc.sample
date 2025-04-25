@@ -87,6 +87,7 @@ plugins=(
   zsh-completions 
   zsh-autosuggestions 
   zsh-syntax-highlighting
+  kube-ps1
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
