@@ -34,12 +34,12 @@ main() {
           fi
 
           info "Generating SSH Key for $(whoami) using algorithm ED25519..."
-          key_name="$HOME/.ssh/id_ed25519_$(date +%Y-%m-%d)"
+          key_name="$HOME/.ssh/id_ed25519"
           ssh-keygen -t ed25519 -f $key_name -C "Public/Private key for $(whoami)"
           info "Succeeded generating SSH Key in $key_name."
 
           info "Generating SSH Key for $(whoami) using algorithm RSA..."
-          rsa_key_name="$HOME/.ssh/id_rsa_$(date +%Y-%m-%d)"
+          rsa_key_name="$HOME/.ssh/id_rsa"
           ssh-keygen -t rsa -f $rsa_key_name -C "Public/Private key for $(whoami)"
           info "Succeeded generating SSH Key in $rsa_key_name."
 
