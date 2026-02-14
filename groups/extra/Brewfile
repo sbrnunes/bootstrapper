@@ -1,13 +1,49 @@
-brew "awscli"
-brew "cookiecutter"
-brew "grafana"
-brew "kubernetes-cli"
-brew "helm"
+# Taps
+tap "hashicorp/tap"
+tap "homebrew/cask-drivers"
+tap "warrensbox/tap"
+
+# Languages
 brew "node"
-brew "openssl"
 brew "python3"
 brew "pyenv"
-brew "terraform"
-brew "gnupg"
-brew "asdf"
+brew "openjdk@17"
+brew "go"
+
+# GitHub
+brew "gh"
+brew "hub"
+
+# Kubernetes
+brew "helm"
+brew "kube-ps1"
+brew "kubectx"
 brew "minikube"
+brew "kubernetes-cli"
+
+# Linux & Terminal tools
+brew "coreutils"
+brew "asdf"
+brew "jq"
+brew "rg"
+brew "yq"
+brew "fzf"
+brew "htop"
+brew "watch"
+brew "openssl"
+
+# Other Tools
+brew "awscli"
+brew "aws-iam-authenticator"
+brew "terraform"
+brew "warrensbox/tap/tfswitch"
+brew "hashicorp/tap/vault"
+brew "sops"
+brew "gnupg"
+brew "gnupg2"
+brew "cookiecutter"
+cask "intellij-idea-ce"
+
+# Databases
+brew "postgresql"
+cask "dbeaver-community"
