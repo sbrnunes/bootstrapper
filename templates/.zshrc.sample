@@ -72,22 +72,23 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
   git
-  colored-man-pages 
-  colorize 
-  pip 
-  python 
-  brew 
-  bundler 
-  dotenv 
-  macos 
-  rake 
-  rbenv 
-  ruby 
-  npm 
-  zsh-completions 
-  zsh-autosuggestions 
+  colored-man-pages
+  colorize
+  pip
+  python
+  brew
+  bundler
+  dotenv
+  macos
+  rake
+  rbenv
+  ruby
+  npm
+  zsh-completions
+  zsh-autosuggestions
   zsh-syntax-highlighting
   kube-ps1
+  asdf
 )
 
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
@@ -119,3 +120,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+autoload -U compinit && compinit
+source ~/env.sh
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
