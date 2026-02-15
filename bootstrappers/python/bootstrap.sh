@@ -31,41 +31,6 @@ main() {
           info "Installing python..."
           brew install python
 
-          info "Installing virtualenverapper..."
-          pip3 install virtualenvwrapper
-
-          info "Setting up virtualenvwrapper..."
-          echo "# Python virtualenvwrapper" >> $HOME/env.sh
-          echo 'export WORKON_HOME=~/.virtualenvs' >> $HOME/env.sh
-          echo 'export VIRTUALENVWRAPPER_PYTHON=$(which python3)' >> $HOME/env.sh
-          echo 'source /opt/homebrew/bin/virtualenvwrapper.sh' >> $HOME/env.sh
-
-          grep -q "Python virtualenvwrapper" "$HOME/env.sh"
-          if [ $? != 0 ]
-          then
-            grep -q "WORKON_HOME" "$HOME/env.sh"
-            if [ $? != 0 ]
-            then
-              echo 'export WORKON_HOME=~/.virtualenvs' >> $HOME/env.sh
-            else
-              sed -i '' -e "s/export.*WORKON_HOME.*/export WORKON_HOME=~\/.virtualenvs/g" $HOME/env.sh
-            fi
-
-            grep -q "VIRTUALENVWRAPPER_PYTHON" "$HOME/env.sh"
-            if [ $? != 0 ]
-            then
-              echo 'export VIRTUALENVWRAPPER_PYTHON=$(which python3)' >> $HOME/env.sh
-            else
-              sed -i '' -e "s/export.*VIRTUALENVWRAPPER_PYTHON.*/export VIRTUALENVWRAPPER_PYTHON=$(which python3)/g" $HOME/env.sh
-            fi
-
-            grep -q "source /opt/homebrew/bin/virtualenvwrapper.sh" "$HOME/env.sh"
-            if [ $? != 0 ]
-            then
-              echo 'source /opt/homebrew/bin/virtualenvwrapper.sh' >> $HOME/env.sh
-            fi
-          fi
-
           info "Sourcing ~/env.sh..."
           source $HOME/env.sh
         fi
